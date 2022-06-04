@@ -12,7 +12,7 @@ import com.workshop.application.model.User;
 import com.workshop.application.service.UserService;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/connect")
 public class UserController {
     
     private UserService userService;
@@ -22,13 +22,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public String registrationForm(){
-        return "registration-login";
-    }
 
-
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<User> saveUser(@RequestBody User user){
         return new ResponseEntity<User>(userService.save(user), HttpStatus.CREATED);
     }
