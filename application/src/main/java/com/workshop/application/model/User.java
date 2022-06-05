@@ -1,6 +1,7 @@
 package com.workshop.application.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,12 +19,10 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -58,5 +57,9 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
 }

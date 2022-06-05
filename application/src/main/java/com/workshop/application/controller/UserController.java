@@ -31,11 +31,6 @@ public class UserController {
         return "home";
     }
 
-    @GetMapping("/login")
-    public String loginUser(){
-        return "home";
-    }
-
     @PostMapping("/register")
     public String registerUser(@Valid User user, BindingResult result, Model model) {
         

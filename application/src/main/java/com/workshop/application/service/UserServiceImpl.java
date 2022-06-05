@@ -1,16 +1,15 @@
 package com.workshop.application.service;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.workshop.application.model.Role;
 import com.workshop.application.model.User;
 import com.workshop.application.repository.RoleRepository;
 import com.workshop.application.repository.UserRepository;
@@ -27,14 +26,13 @@ public class UserServiceImpl implements UserService{
 
     private final RoleRepository roleRepository;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Override
     public User create(User user) {
+        Role roleUser = roleRepository.findById(1L).get();
         user.setCreatedAt(new Date());
         user.setPicture(ServletUriComponentsBuilder.fromCurrentContextPath().path("images/User_Avatar.png").toUriString());
         user.setIsVerified(false);
-        user.setRoles(new HashSet<>(roleRepository.findAll()) );
+        user.addRole(roleUser);
         return userRepository.save(user);
     }
 
