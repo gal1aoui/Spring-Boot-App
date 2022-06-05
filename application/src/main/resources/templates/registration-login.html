@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,6 +51,20 @@
         </div>
       </nav>
     <!--/Nav Bar-->
+    <div class=" mt-5">
+      <div th:if="${param.error}" >
+          Invalid username and password.
+      </div>
+      <div th:if="${param.logout}">
+          You have been logged out.
+      </div>
+
+      <form th:action="@{/connect/login}" method="post">
+        <div><label> User email : <input type="text" id="username" name="username"/> </label></div>
+        <div><label> User password : <input type="password" id="password" name="password"/> </label></div>
+        <div><input type="submit" value="Login"/></div> 
+      </form>
+    </div>
 <div class=" mt-5">
     <div th:if="${param.error}" >
       Invalid username and password.
@@ -60,10 +74,14 @@
   </div>
   <form th:action="@{/connect/register}" method="post" th:object="${user}">
     <div><label> User Name : <input type="text" th:field="*{name}"/> </label></div>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
     <div><label> User Email : <input type="text" th:field="*{email}"/> </label></div>
+    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
     <div><label> Password: <input type="password" th:field="*{password}"/> </label></div>
+    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     <div><input type="submit" value="Sign In"/></div>
-</form>
+  </form>
 </div>
 
     <!--Script import-->
