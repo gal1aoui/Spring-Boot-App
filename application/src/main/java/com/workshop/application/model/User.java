@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,13 +36,22 @@ public class User {
     private Long id;
 
     @Column(name = "user_name")
+    @NotEmpty(message = "Did you forget your Name ?")
     private String name;
 
     @Column(name = "user_email")
+    @NotEmpty(message = "Oops ! we need your email to be notified and verified")
     private String email;
 
     @Column(name = "user_password")
+    @NotEmpty(message = "Make a strong password !! that we can't access into it")
     private String password;
+
+    @Column(name = "user_picture")
+    private String picture;
+
+    @Column(name = "user_verification_status")
+    private Boolean isVerified;
 
     @Column(name = "Created_At")
     protected Date createdAt;
