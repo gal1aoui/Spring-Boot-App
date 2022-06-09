@@ -1,4 +1,4 @@
-package com.workshop.application;
+package com.application.gallaoui.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

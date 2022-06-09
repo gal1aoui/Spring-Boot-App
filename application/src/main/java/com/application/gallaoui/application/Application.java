@@ -1,4 +1,4 @@
-package com.workshop.application;
+package com.application.gallaoui.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
